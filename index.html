@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Siria's site</title>
+  <link href="https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Lora:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+  .prezzo {
+      font-family:'Lora', serif;
+      font-size: 2rem;
+      color: #FF0000;
+    }
+
+    body {
+      font-family: 'ADLaM Display', sans-serif;
+      background-image: url('https://i.ibb.co/Lz9C3n0K/IMG-6018.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      background-color: #f8f8f8cc;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: #e91e63;
+    }
+    .filter-bar {
+      text-align: center;
+      margin: 20px;
+    }
+    .filter-bar select {
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 40px;
+    }
+    .product {
+      border: 1px solid #eee;
+      padding: 20px;
+      text-align: center;
+      border-radius: 8px;
+      background-color: #ffffffcc;
+    }
+    .gallery {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      margin-bottom: 10px;
+    }
+    .gallery img {
+      width: 100%;
+      flex: 0 0 100%;
+      height: auto;
+      border-radius: 6px;
+      scroll-snap-align: center;
+    }
+    .product h3 {
+      margin: 10px 0 5px;
+      font-size: 18px;
+    }
+    .btn-prenota, .btn-visita, .btn-conferma {
+      display: inline-block;
+      margin: 5px;
+      padding: 8px 15px;
+      background-color: #e91e63;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .btn-prenota:hover:not(:disabled),
+    .btn-visita:hover,
+    .btn-conferma:hover {
+      background-color: #d81b60;
+    }
+    .btn-prenota:disabled {
+      background-color: #aaa;
+      cursor: not-allowed;
+    }
+</style>
+</head>
+<body>
+
+<header>THE SIRIA'S SHOW</header>
+
+<div class="filter-bar">
+  <label for="categoryFilter">Filtra per categoria: </label>
+  <select id="categoryFilter">
+    <option value="all">Tutti</option>
+    <option value="elettronica">Elettronica</option>
+    <option value="abbigliamento">Abbigliamento</option>
+    <option value="Cura Estetica">cura estetica</option>
+    <option value="accessori">Accessori</option>
+    <option value="gioielli">Gioielli</option>
+  </select>
+</div>
+
+<div class="container">
+
+  <!-- Sol de Janeiro -->
+  <div class="product" data-category="Cura Estetica">
+    <div class="gallery">
+      <img src="https://m.media-amazon.com/images/I/81R15PzWx4L._AC_SL1500_.jpg">
+      <img src="https://media.sephora.eu/content/dam/digital/pim/published/S/SOL_DE_JANEIRO/P10014446/57929-media_1.jpg?scaleWidth=undefined&scaleHeight=undefined&scaleMode=undefined">
+      <img src="https://media.sephora.eu/content/dam/digital/pim/published/S/SOL_DE_JANEIRO/P10014446/57929-media_2.jpg?scaleWidth=undefined&scaleHeight=undefined&scaleMode=undefined">
+    </div>
+    <h3>Sol de Janeiro - Bum Bum Jet Set</h3>
+    <p class="prezzo">€31,00</p>
+    <button class="btn-visita" onclick="window.open('https://www.sephora.it/p/bum-bum-jet-set---mini-set-per-la-cura-dei-capelli-P10014446.html','_blank')">Visita sito</button>
+    <button class="btn-conferma" data-id="soldejan">Conferma acquisto</button>
+  </div>
+
+  <!-- Gisou -->
+  <div class="product" data-category="Cura Estetica">
+    <div class="gallery">
+      <img src="https://media.sephora.eu/content/dam/digital/pim/published/G/GISOU/549891/236275-media_swatch.jpg">
+      <img src="https://media.sephora.eu/content/dam/digital/pim/published/G/GISOU/P10014606/58089-media_4.jpg?scaleWidth=undefined&scaleHeight=undefined&scaleMode=undefined">
+    </div>
+    <h3>Gisou - Honey Infused Hair Oil</h3>
+    <p class="prezzo">€39,90</p>
+    <button class="btn-visita" onclick="window.open('https://www.sephora.it/p/honey-infused-hair-oil---olio-per-capelli-multifunzione-P10014606.html','_blank')">Visita sito</button>
+    <button class="btn-conferma" data-id="gisou">Conferma acquisto</button>
+  </div>
+
+  <!-- Guess Borsa -->
+  <div class="product" data-category="accessori">
+    <div class="gallery">
+      <img src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,,w_800,c_scale/v1/EU/Style/ECOMM/HWKB9499060-BLA">
+      <img src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/EU/Style/ECOMM/HWKB9499060-BLA-ALT4">
+      <img src="https://img.guess.com/image/upload/f_auto,q_auto,fl_strip_profile,e_sharpen:50,w_1920,c_scale,dpr_auto/v1/EU/Style/ECOMM/HWKB9499060-BLA-ALT6">
+    </div>
+    <h3>Guess - Borsa a mano Georgina</h3>
+    <p class="prezzo">€155,00</p>
+    <button class="btn-visita" onclick="window.open('https://www.guess.eu/it-lu/guess/donna/borse/borse-a-mano/georgina-borsa-a-mano-stampa-pitone-nero/HWKB9499060-BLA.html','_blank')">Visita sito</button>
+    <button class="btn-conferma" data-id="guessborsa">Conferma acquisto</button>
+  </div>
+
+  <!-- Fujifilm -->
+  <div class="product" data-category="elettronica">
+    <div class="gallery">
+      <img src="https://m.media-amazon.com/images/I/513RQTnPBHL.AC_SX679.jpg">
+      <img src="https://mediasgcp.unieuro.it/medias/sys_master/root/h5f/hd7/50473603268638/-api-rest-00ed29448a7522f610cac04d7b9ea7e0-assets-57a0a50c06da17c3a343868eb48fb58b-preview-sgmConversionBaseFormat-sgmProductFormat.jpg">
+      <img src="https://mediasgcp.unieuro.it/medias/sys_master/root/h47/hd7/50473612083230/-api-rest-00ed29448a7522f610cac04d7b9ea7e0-assets-af15ba5d77af2b88bf12f7770ab0b3ba-preview-sgmConversionBaseFormat-sgmProductFormat.jpg">
+    </div>
+    <h3>Fujifilm Instax Mini 12 Blossom Pink</h3>
+    <p class="prezzo">€83,00</p>
+    <button class="btn-visita" onclick="window.open('https://amzn.eu/d/4O5xlNa','_blank')">Visita sito</button>
+    <button class="btn-conferma" data-id="fujifilm">Conferma acquisto</button>
+  </div>
+
+<!-- Stella McCartney -->
+<div class="product" data-category="accessori" data-id="stella-mccartney-falabella">
+  <div class="gallery">
+    <img src="https://www.stellamccartney.com/dw/image/v2/BCWD_PRD/on/demandware.static/-/Sites-master_catalog/default/dw17189c36/Assets/371223WP04091000_X/large/f/d/4/3/fd43e33940a0e9d73f89295d674de0fb6e673710_371223WP04091000_X.jpg?sw=1386&sh=1707">
+    <img src="https://www.stellamccartney.com/dw/image/v2/BCWD_PRD/on/demandware.static/-/Sites-master_catalog/default/dw89342881/Assets/371223WP04091000_P/large/1/f/c/e/1fce22e7b2a4b330e26ee2e2db4c41860f4ac36b_371223WP04091000_P.jpg?sw=1920&sh=2362">
+    <img src="https://www.stellamccartney.com/dw/image/v2/BCWD_PRD/on/demandware.static/-/Sites-master_catalog/default/dw6b27b214/Assets/371223WP04091000_Y/large/d/e/e/f/deef2390f85f75d105b31da7f8a5bf8a314842c4_371223WP04091000_Y.jpg?sw=1920&sh=2362">
+  </div>
+  <h3>Stella McCartney - Mini Falabella Tote</h3>
+  <p class="prezzo">€995,00</p>
+  <button class="btn-visita" onclick="window.open('https://www.stellamccartney.com/it/it/donna/borse/tote-mini-falabella-con-borchie-371223WP04091000.html','_blank')">Visita sito</button>
+  <button class="btn-conferma" data-id="stella-mccartney-falabella">Conferma acquisto</button>
+</div>
+
+<div class="product" data-category="accessori" data-id="pinko-portacarte-chevron">
+  <div class="gallery">
+    <img src="https://res.cloudinary.com/gimg1/image/upload/w_auto:200:631,c_fill,f_auto,q_auto/v1/Pinko/Style/STILLECOM/100251A0GK-Z99Q">
+    <img src="https://res.cloudinary.com/gimg1/image/upload/w_auto:200:631,c_fill,f_auto,q_auto/v1/Pinko/Style/STILLECOM/100251A0GK-Z99Q-02">
+    <img src="https://res.cloudinary.com/gimg1/image/upload/w_auto:200:631,c_fill,f_auto,q_auto/v1/Pinko/Style/STILLECOM/100251A0GK-Z99Q">
+  </div>
+  <h3>Portacarte in nappa con lavorazione chevron</h3>
+  <p class="prezzo">€125,00</p>
+  <button class="btn-visita" onclick="window.open('https://www.pinko.com/it-it/portacarte-in-nappa-con-lavorazione-chevron-100251A0GKZ99Q.html','_blank')">Visita sito</button>
+  <button class="btn-conferma" data-id="pinko-portacarte-chevron">Conferma acquisto</button>
+</div>
+
+<div class="product" data-category="gioielli" data-id="ralph-lauren-tennis-hoop-orecchini">
+  <div class="gallery">
+    <img src="https://img01.ztat.net/article/spp-media-p1/cb658cad4fa1475d9c9f2f1101d3172b/095bbb472b8f4ee39599affa9b20394c.jpg?imwidth=762&filter=packshot">
+    <img src="https://img01.ztat.net/article/spp-media-p1/64ddb4c960864837bf792b1bb9be8b21/85873c6259bf4ba684dde7e55a064693.jpg?imwidth=1800">
+    <img src="https://img01.ztat.net/article/spp-media-p1/843a932c2c584b80afd2434fb6cc7c3b/bfa66e9bd5324d70871db7d25cf654fa.jpg?imwidth=1800">
+  </div>
+  <h3>Lauren Ralph Lauren - Tennis Hoop Orecchini</h3>
+  <p class="prezzo">€79,99</p>
+  <button class="btn-visita" onclick="window.open('https://www.zalando.it/lauren-ralph-lauren-tennis-hoop-orecchini-gold-colouredcry-l4251l0sl-f11.html','_blank')">Visita sito</button>
+  <button class="btn-conferma" data-id="ralph-lauren-tennis-hoop-orecchini">Conferma acquisto</button>
+</div>
+
+<div class="product" data-category="abbigliamento" data-id="adidas-gazelle-badbunny">
+  <div class="gallery">
+    <img src="https://collectiveeffort.it/cdn/shop/files/adidasGazelleIndoorBadBunny-IF9735_1.webp?v=1718956847&width=960">
+    <img src="https://collectiveeffort.it/cdn/shop/files/adidasGazelleIndoorBadBunny-IF9735_1.webp?v=1718956847&width=960">
+    <img src="https://collectiveeffort.it/cdn/shop/files/adidasGazelleIndoorBadBunny-IF9735_2.webp?v=1718956847&width=200">
+  </div>
+  <h3>Adidas Gazelle Indoor Bad Bunny</h3>
+  <p class="prezzo">€380,00</p>
+  <button class="btn-visita" onclick="window.open('https://collectiveeffort.it/products/adidas-gazelle-indoor-bad-bunny-if9735','_blank')">Visita sito</button>
+  <button class="btn-conferma" data-id="adidas-gazelle-badbunny">Conferma acquisto</button>
+</div>
+
+<div class="product" data-category="elettronica" data-id="apple-airpods-4">
+  <div class="gallery">
+    <img src="https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_144637230?x=536&y=402&format=jpg&quality=80&sp=yes&strip=yes&trim&ex=536&ey=402&align=center&resizesource&unsharp=1.5x1+0.7+0.02&cox=0&coy=0&cdx=536&cdy=402">
+    <img src="https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_144637231?x=536&y=402&format=jpg&quality=80&sp=yes&strip=yes&trim&ex=536&ey=402&align=center&resizesource&unsharp=1.5x1+0.7+0.02&cox=0&coy=0&cdx=536&cdy=402">
+    <img src="https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_144637235?x=1800&y=1800&format=jpg&quality=80&sp=yes&strip=yes&trim&ex=1800&ey=1800&align=center&resizesource&unsharp=1.5x1+0.7+0.02&cox=0&coy=0&cdx=1800&cdy=1800">
+  </div>
+  <h3>Apple AirPods 4 con cancellazione attiva del rumore</h3>
+  <p class="prezzo">€168,99</p>
+  <button class="btn-visita" onclick="window.open('https://www.mediaworld.it/it/product/_apple-airpods-4-con-cancellazione-attiva-del-rumore-394860.html?utm_source=new%20owned&utm_medium=ema-other%20email&utm_term=webshare&utm_campaign=webshare','_blank')">Visita sito</button>
+  <button class="btn-conferma" data-id="apple-airpods-4">Conferma acquisto</button>
+</div>
+
+<div class="product" data-category="accessori" data-id="pinko-love-berry-belt">
+  <div class="gallery">
+    <img src="https://img01.ztat.net/article/spp-media-p1/727a209678734aa89a1f377c48e9c614/bd3701870dc1426284d016da866156ff.jpg?imwidth=1800&filter=packshot">
+    <img src="https://img01.ztat.net/article/spp-media-p1/7ffa28b391084c239094e89c274a5cbf/64ab8283fa894a15aee074e6913749b9.jpg?imwidth=1800">
+    <img src="https://img01.ztat.net/article/spp-media-p1/cf160f19741a4998bbf01d17029fd7a3/9adf9850925f4b01b99fefd62d028c6d.jpg?imwidth=1800">
+  </div>
+  <h3>Pinko Love Berry Belt Cintura</h3>
+  <p class="prezzo">€88,00</p>
+  <button class="btn-visita" onclick="window.open('https://www.zalando.it/pinko-love-berry-belt-cintura-black-p6952d000-q12.html','_blank')">Visita sito</button>
+  <button class="btn-conferma" data-id="pinko-love-berry-belt">Conferma acquisto</button>
+</div>
+
+<div class="product" data-category="gioielli" data-id="swarovski-constella-orecchini">
+  <div class="gallery">
+    <img src="https://asset.swarovski.com/images/$size_1450/t_swa103/b_rgb:ffffff,c_scale,dpr_2.0,f_auto,w_675/5563278_png/orecchini-a-cerchio-constella--taglio-round--bianchi--placcato-rodio-swarovski-5563278.png">
+    <img src="https://asset.swarovski.com/images/$size_1450/t_swa103/b_rgb:ffffff,c_scale,dpr_2.0,f_auto,w_675/5563278_png_var1/orecchini-a-cerchio-constella--taglio-round--bianchi--placcato-rodio-swarovski-5563278.png">
+    <img src="https://asset.swarovski.com/images/$size_1450/t_swa103/b_rgb:ffffff,c_scale,dpr_2.0,f_auto,w_675/5563278_png_var2/orecchini-a-cerchio-constella--taglio-round--bianchi--placcato-rodio-swarovski-5563278.png">
+  </div>
+  <h3>Swarovski - Orecchini a cerchio Constella</h3>
+  <p class="prezzo">€71,00</p>
+  <button class="btn-visita" onclick="window.open('https://www.swarovski.com/it-IT/p-5563278/Orecchini-a-cerchio-Constella-Taglio-Round-Bianchi-Placcato-rodio/','_blank')">Visita sito</button>
+  <button class="btn-conferma" data-id="swarovski-constella-orecchini">Conferma acquisto</button>
+</div>
+
+<!-- Guess Ladies Dress Orologio -->
+<div class="product" data-category="gioielli" data-id="guess-ladiesdress-orologio">
+  <div class="gallery">
+    <img src="https://img01.ztat.net/article/spp-media-p1/17c2f60745c54f598b0c0d602893c7f6/f60be57c87584d85807c283695d26a00.jpg?imwidth=1800&filter=packshot">
+    <img src="https://img01.ztat.net/article/spp-media-p1/2ead1c8aeaf046bd96582a344fc045fb/720cf7e350b14787adf4adc5a379856a.jpg?imwidth=1800">
+    <img src="https://img01.ztat.net/article/spp-media-p1/977f8cc4e80d48c2bd2b6d36a3ae6c04/96a94f8f8ac84c438d0e95ebb1622b7f.jpg?imwidth=1800">
+  </div>
+  <h3>Guess - GD lady G</h3>
+  <p class="prezzo">€103,00</p>
+  <button class="btn-visita" onclick="window.open('https://www.zalando.it/guess-ladies-dress-orologio-silver-coloured-gu151m0ht-f11.html','_blank')">Visita sito</button>
+  <button class="btn-conferma" data-id="guess-ladiesdress-orologio">Conferma acquisto</button>
+</div>
+
+<!-- Daniel Wellington Orologio -->
+<div class="product" data-category="gioielli" data-id="danielwellington-petitelumine-orologio">
+  <div class="gallery">
+    <img src="https://img01.ztat.net/article/spp-media-p1/fafa77ab2b274e14bb6f5cf28f582508/f9aae26f426f4d08af7d264a8de1cd71.jpg?imwidth=1800&filter=packshot">
+    <img src="https://img01.ztat.net/article/spp-media-p1/15397fb624874f80a42a30310deee7ab/6888c0aba46a4d69abac684e4fa22743.jpg?imwidth=1800">
+    <img src="https://img01.ztat.net/article/spp-media-p1/6e293b8664a845a58ef5b026c7ce5f74/a9d2678b08bf4c26a4d09accaed4d120.jpg?imwidth=1800">
+  </div>
+  <h3>PETITE LUMINE BEZEL 5-LINK TWO-TONE MOP - Orologio</h3>
+  <p class="prezzo">€219,00</p>
+  <button class="btn-visita" onclick="window.open('https://www.zalando.it/daniel-wellington-orologio-silver-dw254m06q-d11.html','_blank')">Visita sito</button>
+  <button class="btn-conferma" data-id="danielwellington-petitelumine-orologio">Conferma acquisto</button>
+</div>
+
+<!-- MC2 Saint Barth Emilie T-shirt -->
+<div class="product" data-category="abbigliamento" data-id="mc2saintbarth-emilie-tshirt">
+  <div class="gallery">
+    <img src="https://it.mc2saintbarth.com/cdn/shop/files/UID_EMI000105973H-WOMAN-T-SHIRT-WHITE-SMALLEMBROIDERY-MC2-20250630142725_2.jpg?v=1756816438&width=280">
+    <img src="https://it.mc2saintbarth.com/cdn/shop/files/UID_EMI000105973H-WOMAN-T-SHIRT-WHITE-SMALLEMBROIDERY-MC2-20250630143502_1.jpg?v=1756816438&width=280">
+    <img src="https://it.mc2saintbarth.com/cdn/shop/files/UID_EMI000105973H-WOMAN-T-SHIRT-WHITE-SMALLEMBROIDERY-MC2-20250630142725_3.jpg?v=1752222981&width=280">
+  </div>
+  <h3>MC2 Saint Barth - Emilie T-shirt</h3>
+  <p class="prezzo">€75,00</p>
+  <button class="btn-visita" onclick="window.open('https://it.mc2saintbarth.com/products/emilie-cotton-t-shirt-with-50-nervosa-50-deliziosa-embroidery','_blank')">Visita sito</button>
+  <button class="btn-conferma" data-id="mc2saintbarth-emilie-tshirt">Conferma acquisto</button>
+</div>
+
+<!-- Armani Beauty Sì Eau de Parfum -->
+<div class="product" data-category="cura estetica" data-id="armanibeauty-si-eaudeparfum">
+  <div class="gallery">
+    <img src="https://img01.ztat.net/article/spp-media-p1/67c68c283a2041b1a7bcd1ba65e9b5a2/44196063de2742528141f8f0ed0beb9e.jpg?imwidth=1800&filter=packshot">
+    <img src="https://img01.ztat.net/article/spp-media-p1/9f0956fe47f4415aa6a3df474864ccd9/ffa07e18119d4b37be81d6ee0de580da.jpg?imwidth=1800">
+    <img src="https://img01.ztat.net/article/spp-media-p1/4dd26766fb7748ae89bb46c0e07d8d46/719f38929cb24bc3bd1b3e29d1ba6075.jpg?imwidth=1800">
+  </div>
+  <h3>Armani Beauty - Sì Eau de Parfum</h3>
+  <p class="prezzo">€51,00</p>
+  <button class="btn-visita" onclick="window.open('https://www.zalando.it/armani-beauty-si-eau-de-parfum-a4u31i01x-s11.html','_blank')">Visita sito</button>
+  <button class="btn-conferma" data-id="armanibeauty-si-eaudeparfum">Conferma acquisto</button>
+</div>
+<!-- Polo Ralph Lauren Felpa -->
+<div class="product" data-category="abbigliamento" data-id="poloralphlauren-polobear-felpa">
+  <div class="gallery">
+    <img src="https://img01.ztat.net/article/spp-media-p1/e091dba5303e4724b6208d9fcd6ffbb1/7369d84fbcca4fe9bc4ca6a7f713f87f.jpg?imwidth=762">
+    <img src="https://img01.ztat.net/article/spp-media-p1/d5b97e2d219f46fe9e57c6707f835cf6/ac1e2c18f274448ea8ec92fd82974833.jpg?imwidth=400&filter=packshot">
+    <img src="https://img01.ztat.net/article/spp-media-p1/a939a9edf564435881de0dfb882eb8b1/9f4c7f18bdd841da8a96e3adda835f51.jpg?imwidth=400">
+  </div>
+  <h3>Polo Ralph Lauren - Polo Bear Felpa</h3>
+  <p class="prezzo">€245,00</p>
+  <button class="btn-visita" onclick="window.open('https://www.zalando.it/polo-ralph-lauren-polo-bear-fleece-crewneck-felpa-light-smoke-heather-po221j0c5-c11.html','_blank')">Visita sito</button>
+  <button class="btn-conferma" data-id="poloralphlauren-polobear-felpa">Conferma acquisto</button>
+</div>
+
+<!-- MC2 Saint Barth Off-White Tote Bag -->
+<div class="product" data-category="accessori" data-id="mc2saintbarth-offwhite-totebag">
+  <div class="gallery">
+    <img src="https://it.mc2saintbarth.com/cdn/shop/files/UID_VANI00700109H-ACCESSORY-BAG-WHITE_1.jpg?v=1751289346&width=280">
+    <img src="https://it.mc2saintbarth.com/cdn/shop/files/UID_VANI00700109H-ACCESSORY-BAG-WHITE-0-0-20250324143501_2.jpg?v=1751289346&width=280">
+  </div>
+  <h3>MC2 Saint Barth - Off-White Tote Bag</h3>
+  <p class="prezzo">€169,00</p>
+  <button class="btn-visita" onclick="window.open('https://it.mc2saintbarth.com/products/off-white-terry-embossed-vanity-sponge-tote-bag-with-black-details','_blank')">Visita sito</button>
+  <button class="btn-conferma" data-id="mc2saintbarth-offwhite-totebag">Conferma acquisto</button>
+</div>
+
+<!-- Pink Gold Piastra -->
+<div class="product" data-category="elettronica" data-id="pinkgold-piastra-capelli">
+  <div class="gallery">
+    <img src="https://media.douglas.it/medias/EOL30d1247597-0-dgl-IT.jpg?context=bWFzdGVyfGltYWdlc3w2OTQwM3xpbWFnZS9qcGVnfGFHUXlMMmd6WXk4Mk5qSTBNamN4TnpVME9EVTNOQzlGVDB3ek1HUXhNalEzTlRrM1h6QmZaR2RzTFVsVUxtcHdad3w2MWJkMDYzNmNiYjJkZjI4ODI0OTk1ZTdkZDQxOWEwNGU5Yjc3ODBiMjk3ZmRmYjgyMDBjM2MzYTM3NTVhZjVi&grid=true&imPolicy=grayScaled&imdensity=1&imwidth=484">
+    <img src="https://media.douglas.it/medias/U4Bnt61247597-3-dgl-IT.jpg?context=bWFzdGVyfGltYWdlc3w5MzcyNnxpbWFnZS9qcGVnfGFEQXhMMmcwWWk4Mk5qSTBNVEF3TkRZek5ERTBNaTlWTkVKdWREWXhNalEzTlRrM1h6TmZaR2RzTFVsVUxtcHdad3w5MzViNzUwYzc3MWQ4YzYzODYxMGY1ZWM1OGNlMTQ0ODgwZGRiNmIyMzA5MTg4YzVmNjg2ODNhNmQ5MDUyY2Rl&grid=true&imdensity=1&imwidth=484">
+    <img src="https://media.douglas.it/medias/3Iujtd1247597-2-dgl-IT.jpg?context=bWFzdGVyfGltYWdlc3wxMzM1NTV8aW1hZ2UvanBlZ3xhREV6TDJnek9TODJOakkwTWpjeE56WTNPVFkwTmk4elNYVnFkR1F4TWpRM05UazNYekpmWkdkc0xVbFVMbXB3Wnd8NTFmNGEwMDk4MTViMGQwODAwODQwMTI5ODk2ZWVkYmExNzZiOGIxMzZhZTM1NTcyYzU0NjFkMDU1ZTBhOTVlOA&grid=true&imdensity=1&imwidth=484">
+  </div>
+  <h3>Pink Gold® - Piastra per Capelli Professionale</h3>
+  <p class="prezzo">€249,99</p>
+  <button class="btn-visita" onclick="window.open('https://www.douglas.it/it/p/5011831060','_blank')">Visita sito</button>
+  <button class="btn-conferma" data-id="pinkgold-piastra-capelli">Conferma acquisto</button>
+</div>
+
+<!-- The North Face Felpa -->
+<div class="product" data-category="abbigliamento" data-id="thenorthface-balance-felpa">
+  <div class="gallery">
+    <img src="https://i8.amplience.net/i/jpl/jd_766132_a?qlt=92&w=950&h=1212&v=1&fmt=auto">
+    <img src="https://i8.amplience.net/i/jpl/jd_766132_e?qlt=92&w=950&h=1212&v=1&fmt=auto">
+    <img src="https://i8.amplience.net/i/jpl/jd_766132_f?qlt=92&w=950&h=1212&v=1&fmt=auto">
+  </div>
+  <h3>The North Face - Balance Overhead Felpa</h3>
+  <p class="prezzo">€85,00</p>
+  <button class="btn-visita" onclick="window.open('https://www.jdsports.it/product/nero-the-north-face-balance-overhead-felpa/19707173_jdsportsit/','_blank')">Visita sito</button>
+  <button class="btn-conferma" data-id="thenorthface-balance-felpa">Conferma acquisto</button>
+</div>
+
+<!-- Adidas Originals Heart Felpa -->
+<div class="product" data-category="abbigliamento" data-id="adidasoriginals-heart-felpa">
+  <div class="gallery">
+    <img src="https://i8.amplience.net/i/jpl/jd_774113_a?qlt=92&w=950&h=1212&v=1&fmt=auto">
+    <img src="https://i8.amplience.net/i/jpl/jd_774113_b?qlt=92&w=950&h=1212&v=1&fmt=auto">
+    <img src="https://i8.amplience.net/i/jpl/jd_774113_e?qlt=92&w=950&h=1212&v=1&fmt=auto">
+  </div>
+  <h3>Adidas Originals - Heart Felpa</h3>
+  <p class="prezzo">€70,00</p>
+  <button class="btn-visita" onclick="window.open('https://www.jdsports.it/product/grigio-adidas-originals-heart-felpa/19697825_jdsportsit/','_blank')">Visita sito</button>
+  <button class="btn-conferma" data-id="adidasoriginals-heart-felpa">Conferma acquisto</button>
+</div>
+
+<!-- Nike Bubble Graphic Wide Leg Joggers -->
+<div class="product" data-category="abbigliamento" data-id="nike-bubblewide-joggers">
+  <div class="gallery">
+    <img src="https://i8.amplience.net/i/jpl/jd_773471_a?qlt=92&w=950&h=1212&v=1&fmt=auto">
+    <img src="https://i8.amplience.net/i/jpl/jd_773471_b?qlt=92&w=950&h=1212&v=1&fmt=auto">
+    <img src="https://i8.amplience.net/i/jpl/jd_773471_c?qlt=92&w=950&h=1212&v=1&fmt=auto">
+  </div>
+  <h3>Nike - Bubble Graphic Wide Leg Joggers</h3>
+  <p class="prezzo">€65,00</p>
+  <button class="btn-visita" onclick="window.open('https://www.jdsports.it/product/rosa-nike-bubble-graphic-wide-leg-joggers/19708056_jdsportsit/','_blank')">Visita sito</button>
+  <button class="btn-conferma" data-id="nike-bubblewide-joggers">Conferma acquisto</button>
+</div>
+
+<!-- Nike Bubble Graphic Felpa -->
+<div class="product" data-category="abbigliamento" data-id="nike-bubblegraphic-felpa">
+  <div class="gallery">
+    <img src="https://i8.amplience.net/i/jpl/jd_773470_a?qlt=92&w=950&h=1212&v=1&fmt=auto">
+    <img src="https://i8.amplience.net/i/jpl/jd_773470_b?qlt=92&w=950&h=1212&v=1&fmt=auto">
+    <img src="https://i8.amplience.net/i/jpl/jd_773470_c?qlt=92&w=950&h=1212&v=1&fmt=auto">
+  </div>
+  <h3>Nike - Bubble Graphic Felpa</h3>
+  <p class="prezzo">€70,00</p>
+  <button class="btn-visita" onclick="window.open('https://www.jdsports.it/product/rosa-nike-bubble-graphic-felpa/19708055_jdsportsit/','_blank')">Visita sito</button>
+  <button class="btn-conferma" data-id="nike-bubblegraphic-felpa">Conferma acquisto</button>
+</div>
+
+<!-- Bracciale Baguette -->
+<div class="product" data-category="gioielli" data-id="amabilejewels-baguette-bracciale">
+  <div class="gallery">
+    <img src="https://amabilejewels.it/cdn/shop/files/bracciale-baguette-argento-indossato-1.jpg?v=1757593815&width=240">
+  </div>
+  <h3>Amabile Jewels - Bracciale Baguette Argento</h3>
+  <p class="prezzo">59,90</p>
+  <button class="btn-visita" onclick="window.open('https://amabilejewels.it/products/bracciale-baguette','_blank')">Visita sito</button>
+  <button class="btn-conferma" data-id="amabilejewels-baguette-bracciale">Conferma acquisto</button>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const msg = "Alt! Se si visualizza il sito e si compra il prodotto IN QUALSIASI MOMENTO (anche se in autonomia)\nSi prega di tornare sul sito e cliccare \"Conferma acquisto\", così da portare traccia degli acquisti.\n\nGrazie della collaborazione.";
+
+  document.querySelectorAll('.btn-visita').forEach(origBtn => {
+    // 1) estrai l'URL prima di rimuovere l'onclick (se esiste)
+    let url = origBtn.dataset.href || origBtn.dataset.redirect || '';
+    const onclickAttr = origBtn.getAttribute('onclick');
+    if (!url && onclickAttr) {
+      const m = onclickAttr.match(/window\.open\(\s*['"]([^'"]+)['"]/i)
+             || onclickAttr.match(/location\.href\s*=\s*['"]([^'"]+)['"]/i);
+      if (m) url = m[1];
+    }
+
+    // 2) clona il bottone per rimuovere eventuali listener inline/precedenti
+    const btn = origBtn.cloneNode(true);
+    // assicuriamoci che il nuovo bottone abbia il dataset.href corretto
+    if (url) btn.dataset.href = url;
+    // rimuoviamo ogni onclick inline sul clone
+    btn.removeAttribute('onclick');
+
+    // sostituisci nodo
+    origBtn.parentNode.replaceChild(btn, origBtn);
+
+    // 3) aggiungi il listener pulito (senza possibilità di doppio trigger)
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+
+      // se è già in fase di processing, non fare nulla (evita loop)
+      if (btn.dataset.processing === 'true') return;
+      btn.dataset.processing = 'true';
+
+      const ok = confirm(msg);
+
+      if (ok) {
+        const target = btn.dataset.href;
+        if (!target) {
+          alert('Spiacente, URL prodotto non trovato.');
+          btn.dataset.processing = 'false';
+          return;
+        }
+        // apri in nuova scheda; se bloccato, fallback nella stessa scheda
+        const w = window.open(target, '_blank');
+        if (!w) window.location.href = target;
+        // lasciamo processing true (non serve resettarlo) oppure lo resettiamo dopo breve timeout
+        setTimeout(() => { btn.dataset.processing = 'false'; }, 1000);
+      } else {
+        // utente ha premuto Annulla: evitiamo ri-trigger immediato resettando la flag dopo un breve delay
+        setTimeout(() => { btn.dataset.processing = 'false'; }, 250);
+      }
+    });
+  });
+
+  // (opzionale) log utile per debug
+  console.log('[VISITA] handlers impostati su', document.querySelectorAll('.btn-visita').length, 'bottone/i');
+});
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.btn-visita').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      // Messaggio di avviso
+      const conferma = confirm("Alt! Se si visualizza il sito e si compra il prodotto IN QUALSIASI MOMENTO (anche se in autonomia) si prega di tornare sul sito e cliccare 'Conferma acquisto', così da portare traccia degli acquisti.\n\nGrazie della collaborazione.");
+
+      // Se l'utente preme OK → reindirizza al sito del prodotto
+      if (conferma) {
+        const url = btn.dataset.href;
+        if (url) {
+          window.location.href = url; // apre nella stessa scheda
+          // se invece vuoi aprirlo in nuova scheda usa:
+          // window.open(url, "_blank");
+        }
+      }
+    });
+  });
+});
+document.addEventListener('DOMContentLoaded', () => {
+  const confermati = JSON.parse(localStorage.getItem('confermati')) || {};
+
+  document.querySelectorAll('.btn-conferma').forEach(button => {
+    const id = button.getAttribute('data-id');
+    if (confermati[id]) {
+      button.textContent = "🎁già regalato";
+      button.disabled = true;
+    }
+    button.addEventListener('click', () => {
+      const conferma = confirm("“Salve! Ma guarda chi si vede.. la persona che ha speso un sacco di soldi per Siria, ti ringraziamo vivamente! Clicca su “ok” e prosegui solo se hai davvero acquistato il prodotto, mi raccomando. Grazie.”");
+      if (conferma) {
+        // aggiorna bottone
+        button.textContent = "🎁già regalato";
+        button.disabled = true;
+        confermati[id] = true;
+        localStorage.setItem('confermati', JSON.stringify(confermati));
+
+        // reindirizza a un sito esterno (pagina di ringraziamento)
+        window.location.href = "https://example.com/thankyou";
+      }
+    });
+  });
+
+  // Filtro prodotti
+  const filter = document.getElementById('categoryFilter');
+  filter.addEventListener('change', () => {
+    const selected = filter.value.toLowerCase();
+    document.querySelectorAll('.product').forEach(product => {
+      const category = product.getAttribute('data-category').toLowerCase();
+      product.style.display = (selected === 'all' || category === selected) ? 'block' : 'none';
+    });
+  });
+});
+</script>
+
+</body>
+</html>
