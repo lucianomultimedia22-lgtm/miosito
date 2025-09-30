@@ -401,56 +401,63 @@
   <button class="btn-conferma" data-id="amabilejewels-baguette-bracciale" data-form="https://forms.gle/FPSd79MxjxYJtoW29">Conferma acquisto</button>
 </div>
 <script>
+<script>
 const API_URL = "https://script.google.com/macros/s/AKfycbzxeplX6vc9U34yfaaTjfjciyqlv1m5wHqeUS0ORsPhnF24yReS9fZN9PE3zALVQT-m6Q/exec";
 
-    // 1. Gestione bottoni "Visita"
-    document.querySelectorAll(".btn-visita").forEach(button => {
-      button.addEventListener("click", () => {
-        const conferma = confirm("Vuoi davvero visitare questo prodotto?");
-        if (conferma) {
-          window.open(button.getAttribute("data-href"), "_blank");
-        }
-      });
-    });
-
-    // 2. Gestione bottoni "Conferma"
-    document.querySelectorAll(".btn-conferma").forEach(button => {
-      button.addEventListener("click", () => {
-        const conferma = confirm("Vuoi confermare l'acquisto di questo regalo?");
-        if (conferma) {
-          const urlForm = button.getAttribute("data-form");
-          if (urlForm) {
-            window.open("https://forms.gle/FPSd79MxjxYJtoW29", "_blank");
-          }
-        }
-      });
-    });
-
-    // 3. (Opzionale) segna i regali già confermati leggendo dal foglio
-    fetch(API_URL)
-      .then(res => res.json())
-      .then(confermati => {
-        document.querySelectorAll(".btn-conferma").forEach(button => {
-          const id = button.getAttribute("data-id");
-          if (confermati[id]) {
-            button.textContent = "🎁 Già regalato";
-            button.disabled = true;
-          }
-        });
-      })
-      .catch(err => console.log("Errore nel caricamento:", err));
-   // Filtro prodotti
-  const filter = document.getElementById('categoryFilter');
-  filter.addEventListener('change', () => {
-    const selected = filter.value.toLowerCase();
-    document.querySelectorAll('.product').forEach(product => {
-      const category = product.getAttribute('data-category').toLowerCase();
-      product.style.display = (selected === 'all' || category === selected) ? 'block' : 'none';
-    });
+// 1. Gestione bottoni "Visita"
+document.querySelectorAll(".btn-visita").forEach(button => {
+  const url = button.getAttribute("onclick").match(/'(.*?)'/)[1]; // prendo l'URL dal tuo onclick
+  button.removeAttribute("onclick"); // tolgo quello inline (per non fare doppio click)
+  button.addEventListener("click", () => {
+    const conferma = confirm("Vuoi davvero visitare questo prodotto?");
+    if (conferma) {
+      window.open(url, "_blank");
+    }
   });
+});
+
+// 2. Gestione bottoni "Conferma"
+document.querySelectorAll(".btn-conferma").forEach(button => {
+  button.addEventListener("click", () => {
+    const conferma = confirm("Vuoi confermare l'acquisto di questo regalo?");
+    if (conferma) {
+      const urlForm = button.getAttribute("data-form");
+      if (urlForm) {
+        window.open(urlForm, "_blank"); // adesso apre il form giusto
+      }
+    }
+  });
+});
+
+// 3. Segna i regali già confermati leggendo dal foglio
+fetch(API_URL)
+  .then(res => res.json())
+  .then(confermati => {
+    document.querySelectorAll(".btn-conferma").forEach(button => {
+      const id = button.getAttribute("data-id");
+      if (confermati[id]) {
+        button.textContent = "🎁 Già regalato";
+        button.disabled = true;
+      }
+    });
+  })
+  .catch(err => console.log("Errore nel caricamento:", err));
+
+// 4. Filtro prodotti
+const filter = document.getElementById('categoryFilter');
+filter.addEventListener('change', () => {
+  const selected = filter.value.toLowerCase();
+  document.querySelectorAll('.product').forEach(product => {
+    const category = product.getAttribute('data-category').toLowerCase();
+    product.style.display = (selected === 'all' || category === selected) ? 'block' : 'none';
+  });
+});
+</script>
+
 </script>
 </body>
 </html>
+
 
 
 
