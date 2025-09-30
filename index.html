@@ -433,7 +433,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbzxeplX6vc9U34yfaaTjfjc
     // Gestione bottoni "Visita" con alert
     document.querySelectorAll(".btn-visita").forEach(button => {
       button.addEventListener("click", () => {
-        const conferma = confirm("Alt! Se si visualizza il sito e si compra il prodotto IN QUALSIASI MOMENTO (anche se in autonomia) si prega di tornare sul sito e cliccare 'Conferma acquisto', così da portare traccia degli acquisti.\n\nGrazie della collaborazione.");
+        const conferma = confirm("vuoi visitare il sito?");
         if (conferma) {
           window.open(button.getAttribute("data-href"), "_blank");
         }
@@ -446,6 +446,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbzxeplX6vc9U34yfaaTjfjc
 
 </body>
 </html>
+
 
 
 
