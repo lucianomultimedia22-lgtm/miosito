@@ -409,8 +409,6 @@
     const w = window.open(url, "_blank");
     if (!w) window.location.href = url;
   }
-
-  // VISITA: prendi prima data-href/dataset, altrimenti prova a estrarre da onclick (in modo sicuro)
   document.querySelectorAll(".btn-visita").forEach(btn => {
     // preferisci dataset.href o data-href
     let url = btn.dataset.href || btn.getAttribute("data-href") || null;
@@ -423,8 +421,6 @@
         if (m) url = m[1];
       }
     }
-
-    // rimuovi onclick inline (evita doppio trigger)
     btn.removeAttribute("onclick");
 
     btn.addEventListener("click", (e) => {
@@ -439,7 +435,7 @@
     });
   });
 
-  // CONFERMA: apri il form specifico (data-form) — avvisa se manca
+
   document.querySelectorAll(".btn-conferma").forEach(btn => {
     btn.addEventListener("click", (e) => {
       e.preventDefault();
@@ -455,7 +451,6 @@
     });
   });
 
-  // STATO: leggi dal foglio Google e disabilita i già confermati
   if (API_URL && API_URL.indexOf("TUO_ID") === -1) {
     fetch(API_URL)
       .then(r => r.json())
@@ -469,14 +464,12 @@
         });
       })
       .catch(err => {
-        // non blocchiamo i confirm se l'API non risponde
         console.warn("Impossibile leggere lo stato dal backend:", err);
       });
   } else {
     console.warn("API_URL non impostata correttamente: sostituisci con il tuo link Apps Script.");
   }
 
-  // FILTRO prodotti (corretto)
   const filter = document.getElementById('categoryFilter');
   if (filter) {
     filter.addEventListener('change', () => {
@@ -492,6 +485,7 @@
 
 </body>
 </html>
+
 
 
 
