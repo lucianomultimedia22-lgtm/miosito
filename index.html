@@ -439,9 +439,19 @@ const API_URL = "https://script.google.com/macros/s/AKfycbzxeplX6vc9U34yfaaTjfjc
         });
       })
       .catch(err => console.log("Errore nel caricamento:", err));
+   // Filtro prodotti
+  const filter = document.getElementById('categoryFilter');
+  filter.addEventListener('change', () => {
+    const selected = filter.value.toLowerCase();
+    document.querySelectorAll('.product').forEach(product => {
+      const category = product.getAttribute('data-category').toLowerCase();
+      product.style.display = (selected === 'all' || category === selected) ? 'block' : 'none';
+    });
+  });
 </script>
 </body>
 </html>
+
 
 
 
