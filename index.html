@@ -403,45 +403,46 @@
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbzxeplX6vc9U34yfaaTjfjciyqlv1m5wHqeUS0ORsPhnF24yReS9fZN9PE3zALVQT-m6Q/exec";
 
-    // Carica lo stato dal Google Sheet
-    fetch(API_URL)
-      .then(res => res.json())
-      .then(confermati => {
-        document.querySelectorAll(".btn-conferma").forEach(button => {
-          const id = button.getAttribute("data-id");
-
-          // Se già confermato → disabilita
-          if (confermati[id]) {
-            button.textContent = "🎁 Già regalato";
-            button.disabled = true;
-          }
-
-          // Altrimenti → chiede conferma e apre il form
-          button.addEventListener("click", () => {
-            const conferma = confirm("Salve! Ma guarda chi si vede.. la persona che ha speso un sacco di soldi per Siria, ti ringraziamo vivamente!
-                                     Clicca su “ok” e prosegui solo se hai davvero acquistato il prodotto, mi raccomando. Grazie.");
-            if (conferma) {
-              const urlForm = button.getAttribute("data-form");
-              if (urlForm) {
-                window.open(https://docs.google.com/forms/d/e/1FAIpQLSf-klVe3HnkkaxKyAnEQHAgQO5-2bIcxDccTawJK-V2OLZTSQ/viewform?usp=header, "_blank");
-              }
-            }
-          });
-        });
-      });
-
-    // Gestione bottoni "Visita" con alert
+    // 1. Gestione bottoni "Visita"
     document.querySelectorAll(".btn-visita").forEach(button => {
       button.addEventListener("click", () => {
-        const conferma = confirm("vuoi visitare il sito?");
+        const conferma = confirm("Vuoi davvero visitare questo prodotto?");
         if (conferma) {
           window.open(button.getAttribute("data-href"), "_blank");
         }
       });
     });
-  </script>
+
+    // 2. Gestione bottoni "Conferma"
+    document.querySelectorAll(".btn-conferma").forEach(button => {
+      button.addEventListener("click", () => {
+        const conferma = confirm("Vuoi confermare l'acquisto di questo regalo?");
+        if (conferma) {
+          const urlForm = button.getAttribute("data-form");
+          if (urlForm) {
+            window.open("https://forms.gle/FPSd79MxjxYJtoW29", "_blank");
+          }
+        }
+      });
+    });
+
+    // 3. (Opzionale) segna i regali già confermati leggendo dal foglio
+    fetch(API_URL)
+      .then(res => res.json())
+      .then(confermati => {
+        document.querySelectorAll(".btn-conferma").forEach(button => {
+          const id = button.getAttribute("data-id");
+          if (confermati[id]) {
+            button.textContent = "🎁 Già regalato";
+            button.disabled = true;
+          }
+        });
+      })
+      .catch(err => console.log("Errore nel caricamento:", err));
+</script>
 </body>
 </html>
+
 
 
 
