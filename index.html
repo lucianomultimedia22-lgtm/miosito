@@ -401,121 +401,51 @@
   <button class="btn-conferma" data-id="amabilejewels-baguette-bracciale">Conferma acquisto</button>
 </div>
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const msg = "Alt! Se si visualizza il sito e si compra il prodotto IN QUALSIASI MOMENTO (anche se in autonomia)\nSi prega di tornare sul sito e cliccare \"Conferma acquisto\", così da portare traccia degli acquisti.\n\nGrazie della collaborazione.";
+const API_URL = "https://script.google.com/macros/s/AKfycbzxeplX6vc9U34yfaaTjfjciyqlv1m5wHqeUS0ORsPhnF24yReS9fZN9PE3zALVQT-m6Q/exec";
 
-  document.querySelectorAll('.btn-visita').forEach(origBtn => {
-    // 1) estrai l'URL prima di rimuovere l'onclick (se esiste)
-    let url = origBtn.dataset.href || origBtn.dataset.redirect || '';
-    const onclickAttr = origBtn.getAttribute('onclick');
-    if (!url && onclickAttr) {
-      const m = onclickAttr.match(/window\.open\(\s*['"]([^'"]+)['"]/i)
-             || onclickAttr.match(/location\.href\s*=\s*['"]([^'"]+)['"]/i);
-      if (m) url = m[1];
-    }
+    // Carica lo stato dal Google Sheet
+    fetch(API_URL)
+      .then(res => res.json())
+      .then(confermati => {
+        document.querySelectorAll(".btn-conferma").forEach(button => {
+          const id = button.getAttribute("data-id");
 
-    // 2) clona il bottone per rimuovere eventuali listener inline/precedenti
-    const btn = origBtn.cloneNode(true);
-    // assicuriamoci che il nuovo bottone abbia il dataset.href corretto
-    if (url) btn.dataset.href = url;
-    // rimuoviamo ogni onclick inline sul clone
-    btn.removeAttribute('onclick');
+          // Se già confermato → disabilita
+          if (confermati[id]) {
+            button.textContent = "🎁 Già regalato";
+            button.disabled = true;
+          }
 
-    // sostituisci nodo
-    origBtn.parentNode.replaceChild(btn, origBtn);
+          // Altrimenti → chiede conferma e apre il form
+          button.addEventListener("click", () => {
+            const conferma = confirm("Salve! Ma guarda chi si vede.. la persona che ha speso un sacco di soldi per Siria, ti ringraziamo vivamente!
+                                     Clicca su “ok” e prosegui solo se hai davvero acquistato il prodotto, mi raccomando. Grazie.");
+            if (conferma) {
+              const urlForm = button.getAttribute("data-form");
+              if (urlForm) {
+                window.open(urlForm, "_blank");
+              }
+            }
+          });
+        });
+      });
 
-    // 3) aggiungi il listener pulito (senza possibilità di doppio trigger)
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopImmediatePropagation();
-
-      // se è già in fase di processing, non fare nulla (evita loop)
-      if (btn.dataset.processing === 'true') return;
-      btn.dataset.processing = 'true';
-
-      const ok = confirm(msg);
-
-      if (ok) {
-        const target = btn.dataset.href;
-        if (!target) {
-          alert('Spiacente, URL prodotto non trovato.');
-          btn.dataset.processing = 'false';
-          return;
+    // Gestione bottoni "Visita" con alert
+    document.querySelectorAll(".btn-visita").forEach(button => {
+      button.addEventListener("click", () => {
+        const conferma = confirm("Alt! Se si visualizza il sito e si compra il prodotto IN QUALSIASI MOMENTO (anche se in autonomia) si prega di tornare sul sito e cliccare 'Conferma acquisto', così da portare traccia degli acquisti.\n\nGrazie della collaborazione.");
+        if (conferma) {
+          window.open(button.getAttribute("data-href"), "_blank");
         }
-        // apri in nuova scheda; se bloccato, fallback nella stessa scheda
-        const w = window.open(target, '_blank');
-        if (!w) window.location.href = target;
-        // lasciamo processing true (non serve resettarlo) oppure lo resettiamo dopo breve timeout
-        setTimeout(() => { btn.dataset.processing = 'false'; }, 1000);
-      } else {
-        // utente ha premuto Annulla: evitiamo ri-trigger immediato resettando la flag dopo un breve delay
-        setTimeout(() => { btn.dataset.processing = 'false'; }, 250);
-      }
+      });
     });
-  });
-
-  // (opzionale) log utile per debug
-  console.log('[VISITA] handlers impostati su', document.querySelectorAll('.btn-visita').length, 'bottone/i');
-});
-
-
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.btn-visita').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-
-      // Messaggio di avviso
-      const conferma = confirm("Alt! Se si visualizza il sito e si compra il prodotto IN QUALSIASI MOMENTO (anche se in autonomia) si prega di tornare sul sito e cliccare 'Conferma acquisto', così da portare traccia degli acquisti.\n\nGrazie della collaborazione.");
-
-      // Se l'utente preme OK → reindirizza al sito del prodotto
-      if (conferma) {
-        const url = btn.dataset.href;
-        if (url) {
-          window.location.href = url; // apre nella stessa scheda
-          // se invece vuoi aprirlo in nuova scheda usa:
-          // window.open(url, "_blank");
-        }
-      }
-    });
-  });
-});
-document.addEventListener('DOMContentLoaded', () => {
-  const confermati = JSON.parse(localStorage.getItem('confermati')) || {};
-
-  document.querySelectorAll('.btn-conferma').forEach(button => {
-    const id = button.getAttribute('data-id');
-    if (confermati[id]) {
-      button.textContent = "🎁già regalato";
-      button.disabled = true;
-    }
-    button.addEventListener('click', () => {
-      const conferma = confirm("“Salve! Ma guarda chi si vede.. la persona che ha speso un sacco di soldi per Siria, ti ringraziamo vivamente! Clicca su “ok” e prosegui solo se hai davvero acquistato il prodotto, mi raccomando. Grazie.”");
-      if (conferma) {
-        // aggiorna bottone
-        button.textContent = "🎁già regalato";
-        button.disabled = true;
-        confermati[id] = true;
-        localStorage.setItem('confermati', JSON.stringify(confermati));
-
-        // reindirizza a un sito esterno (pagina di ringraziamento)
-        window.location.href = "https://example.com/thankyou";
-      }
-    });
-  });
-
-  // Filtro prodotti
-  const filter = document.getElementById('categoryFilter');
-  filter.addEventListener('change', () => {
-    const selected = filter.value.toLowerCase();
-    document.querySelectorAll('.product').forEach(product => {
-      const category = product.getAttribute('data-category').toLowerCase();
-      product.style.display = (selected === 'all' || category === selected) ? 'block' : 'none';
-    });
-  });
-});
+  </script>
+</body>
+</html>
 </script>
 
 </body>
 </html>
+
 
 
