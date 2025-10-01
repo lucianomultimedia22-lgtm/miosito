@@ -442,11 +442,7 @@
       const ok = confirm("“Salve! Ma guarda chi si vede.. la persona che ha speso un sacco di soldi per Siria, ti ringraziamo vivamente! Clicca su “ok” e prosegui solo se hai davvero acquistato il prodotto, mi raccomando. Grazie.”");
       if (!ok) return;
 
-      const urlForm = btn.dataset.form || btn.getAttribute("data-form");
-      if (!urlForm) {
-        alert("Link al form non impostato per questo prodotto.");
-        return;
-      }
+      
       safeOpen(urlForm);
     });
   });
@@ -485,6 +481,7 @@
 
 </body>
 </html>
+
 
 
 
