@@ -40,17 +40,6 @@
 <div class="container">
 
 <?php
-// Connessione al database
-$conn = new mysqli("localhost","username","password","database");
-$stati = [];
-if(!$conn->connect_error){
-    $res = $conn->query("SELECT id, stato FROM regali");
-    while($row = $res->fetch_assoc()){
-        $stati[$row['id']] = $row['stato'];
-    }
-}
-
-// Lista prodotti (puoi aggiungere tutti i tuoi prodotti qui)
 $prodotti = [
     [
         "id"=>"soldejan",
@@ -64,7 +53,8 @@ $prodotti = [
             "https://media.sephora.eu/content/dam/digital/pim/published/S/SOL_DE_JANEIRO/P10014446/57929-media_2.jpg?scaleWidth=undefined&scaleHeight=undefined&scaleMode=undefined"
         ]
     ],
-       "id"=>"gisou",
+    [
+        "id"=>"gisou",
         "categoria"=>"cura estetica",
         "nome"=>"Gisou - Honey Infused Hair Oil",
         "prezzo"=>"€39,90",
@@ -85,254 +75,26 @@ $prodotti = [
             "https://img01.ztat.net/article/spp-media-p1/3ecdcfc6940d432cbe397b4ec3d558c0/4038f18bf02f4af5bdf114708b886976.jpg?imwidth=1800",
             "https://img01.ztat.net/article/spp-media-p1/9df90462ea154c9781596873674e208c/dd866aa80ef74cbc83b2749ac90b6edd.jpg?imwidth=1800"
         ]
-    ],
-    [
-        "id"=>"fujifilm",
-        "categoria"=>"elettronica",
-        "nome"=>"Fujifilm Instax Mini 12 Blossom Pink",
-        "prezzo"=>"€83,00",
-        "sito"=>"https://amzn.eu/d/4O5xlNa",
-        "immagini"=>[
-            "https://m.media-amazon.com/images/I/513RQTnPBHL.AC_SX679.jpg",
-            "https://mediasgcp.unieuro.it/medias/sys_master/root/h5f/hd7/50473603268638/-api-rest-00ed29448a7522f610cac04d7b9ea7e0-assets-57a0a50c06da17c3a343868eb48fb58b-preview-sgmConversionBaseFormat-sgmProductFormat.jpg",
-            "https://mediasgcp.unieuro.it/medias/sys_master/root/h47/hd7/50473612083230/-api-rest-00ed29448a7522f610cac04d7b9ea7e0-assets-af15ba5d77af2b88bf12f7770ab0b3ba-preview-sgmConversionBaseFormat-sgmProductFormat.jpg"
-        ]
-    ],
-    [
-        "id"=>"stella-mccartney-falabella",
-        "categoria"=>"accessori",
-        "nome"=>"Stella McCartney - Mini Falabella Tote",
-        "prezzo"=>"€995,00",
-        "sito"=>"https://www.stellamccartney.com/it/it/donna/borse/tote-mini-falabella-con-borchie-371223WP04091000.html",
-        "immagini"=>[
-            "https://www.stellamccartney.com/dw/image/v2/BCWD_PRD/on/demandware.static/-/Sites-master_catalog/default/dw17189c36/Assets/371223WP04091000_X/large/f/d/4/3/fd43e33940a0e9d73f89295d674de0fb6e673710_371223WP04091000_X.jpg?sw=1386&sh=1707",
-            "https://www.stellamccartney.com/dw/image/v2/BCWD_PRD/on/demandware.static/-/Sites-master_catalog/default/dw89342881/Assets/371223WP04091000_P/large/1/f/c/e/1fce22e7b2a4b330e26ee2e2db4c41860f4ac36b_371223WP04091000_P.jpg?sw=1920&sh=2362",
-            "https://www.stellamccartney.com/dw/image/v2/BCWD_PRD/on/demandware.static/-/Sites-master_catalog/default/dw6b27b214/Assets/371223WP04091000_Y/large/d/e/e/f/deef2390f85f75d105b31da7f8a5bf8a314842c4_371223WP04091000_Y.jpg?sw=1920&sh=2362"
-        ]
-    ],
-        [
-        "id"=>"pinko-portacarte-chevron",
-        "categoria"=>"accessori",
-        "nome"=>"Portacarte in nappa con lavorazione chevron",
-        "prezzo"=>"€125,00",
-        "sito"=>"https://www.pinko.com/it-it/portacarte-in-nappa-con-lavorazione-chevron-100251A0GKZ99Q.html",
-        "immagini"=>[
-            "https://res.cloudinary.com/gimg1/image/upload/w_auto:200:631,c_fill,f_auto,q_auto/v1/Pinko/Style/STILLECOM/100251A0GK-Z99Q",
-            "https://res.cloudinary.com/gimg1/image/upload/w_auto:200:631,c_fill,f_auto,q_auto/v1/Pinko/Style/STILLECOM/100251A0GK-Z99Q-02",
-            "https://res.cloudinary.com/gimg1/image/upload/w_auto:200:631,c_fill,f_auto,q_auto/v1/Pinko/Style/STILLECOM/100251A0GK-Z99Q"
-        ]
-    ],
-    [
-        "id"=>"ralph-lauren-tennis-hoop-orecchini",
-        "categoria"=>"gioielli",
-        "nome"=>"Lauren Ralph Lauren - Tennis Hoop Orecchini",
-        "prezzo"=>"€79,99",
-        "sito"=>"https://www.zalando.it/lauren-ralph-lauren-tennis-hoop-orecchini-gold-colouredcry-l4251l0sl-f11.html",
-        "immagini"=>[
-            "https://img01.ztat.net/article/spp-media-p1/cb658cad4fa1475d9c9f2f1101d3172b/095bbb472b8f4ee39599affa9b20394c.jpg?imwidth=762&filter=packshot",
-            "https://img01.ztat.net/article/spp-media-p1/64ddb4c960864837bf792b1bb9be8b21/85873c6259bf4ba684dde7e55a064693.jpg?imwidth=1800",
-            "https://img01.ztat.net/article/spp-media-p1/843a932c2c584b80afd2434fb6cc7c3b/bfa66e9bd5324d70871db7d25cf654fa.jpg?imwidth=1800"
-        ]
-    ],
-    [
-        "id"=>"adidas-gazelle-badbunny",
-        "categoria"=>"abbigliamento",
-        "nome"=>"Adidas Gazelle Indoor Bad Bunny",
-        "prezzo"=>"€380,00",
-        "sito"=>"https://collectiveeffort.it/products/adidas-gazelle-indoor-bad-bunny-if9735",
-        "immagini"=>[
-            "https://collectiveeffort.it/cdn/shop/files/adidasGazelleIndoorBadBunny-IF9735_1.webp?v=1718956847&width=960",
-            "https://collectiveeffort.it/cdn/shop/files/adidasGazelleIndoorBadBunny-IF9735_2.webp?v=1718956847&width=200"
-        ]
-    ],
-    [
-        "id"=>"apple-airpods-4",
-        "categoria"=>"elettronica",
-        "nome"=>"Apple AirPods 4 con cancellazione attiva del rumore",
-        "prezzo"=>"€168,99",
-        "sito"=>"https://www.mediaworld.it/it/product/_apple-airpods-4-con-cancellazione-attiva-del-rumore-394860.html?utm_source=new%20owned&utm_medium=ema-other%20email&utm_term=webshare&utm_campaign=webshare",
-        "immagini"=>[
-            "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_144637230?x=536&y=402&format=jpg&quality=80&sp=yes&strip=yes&trim&ex=536&ey=402&align=center&resizesource&unsharp=1.5x1+0.7+0.02&cox=0&coy=0&cdx=536&cdy=402",
-            "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_144637235?x=1800&y=1800&format=jpg&quality=80&sp=yes&strip=yes&trim&ex=1800&ey=1800&align=center&resizesource&unsharp=1.5x1+0.7+0.02&cox=0&coy=0&cdx=1800&cdy=1800"
-        ]
-    ],
-    [
-        "id"=>"pinko-love-berry-belt",
-        "categoria"=>"accessori",
-        "nome"=>"Pinko Love Berry Belt Cintura",
-        "prezzo"=>"€88,00",
-        "sito"=>"https://www.zalando.it/pinko-love-berry-belt-cintura-black-p6952d000-q12.html",
-        "immagini"=>[
-            "https://img01.ztat.net/article/spp-media-p1/727a209678734aa89a1f377c48e9c614/bd3701870dc1426284d016da866156ff.jpg?imwidth=1800&filter=packshot",
-            "https://img01.ztat.net/article/spp-media-p1/7ffa28b391084c239094e89c274a5cbf/64ab8283fa894a15aee074e6913749b9.jpg?imwidth=1800",
-            "https://img01.ztat.net/article/spp-media-p1/cf160f19741a4998bbf01d17029fd7a3/9adf9850925f4b01b99fefd62d028c6d.jpg?imwidth=1800"
-        ]
-    ],
-         [
-        "id"=>"swarovski-constella-orecchini",
-        "categoria"=>"gioielli",
-        "nome"=>"Swarovski - Orecchini a cerchio Constella",
-        "prezzo"=>"€71,00",
-        "sito"=>"https://www.swarovski.com/it-IT/p-5563278/Orecchini-a-cerchio-Constella-Taglio-Round-Bianchi-Placcato-rodio/",
-        "immagini"=>[
-            "https://asset.swarovski.com/images/$size_1450/t_swa103/b_rgb:ffffff,c_scale,dpr_2.0,f_auto,w_675/5563278_png/orecchini-a-cerchio-constella--taglio-round--bianchi--placcato-rodio-swarovski-5563278.png",
-            "https://asset.swarovski.com/images/$size_1450/t_swa103/b_rgb:ffffff,c_scale,dpr_2.0,f_auto,w_675/5563278_png_var1/orecchini-a-cerchio-constella--taglio-round--bianchi--placcato-rodio-swarovski-5563278.png",
-            "https://asset.swarovski.com/images/$size_1450/t_swa103/b_rgb:ffffff,c_scale,dpr_2.0,f_auto,w_675/5563278_png_var2/orecchini-a-cerchio-constella--taglio-round--bianchi--placcato-rodio-swarovski-5563278.png"
-        ]
-    ],
-        "id" => "guess-ladiesdress-orologio",
-        "categoria" => "gioielli",
-        "nome" => "Guess - GD lady G",
-        "prezzo" => "€103,00",
-        "sito" => "https://www.zalando.it/guess-ladies-dress-orologio-silver-coloured-gu151m0ht-f11.html",
-        "form" => "https://forms.gle/GCm7rdBEhikc5DNY6",
-        "immagini" => [
-            "https://img01.ztat.net/article/spp-media-p1/17c2f60745c54f598b0c0d602893c7f6/f60be57c87584d85807c283695d26a00.jpg?imwidth=1800&filter=packshot",
-            "https://img01.ztat.net/article/spp-media-p1/2ead1c8aeaf046bd96582a344fc045fb/720cf7e350b14787adf4adc5a379856a.jpg?imwidth=1800",
-            "https://img01.ztat.net/article/spp-media-p1/977f8cc4e80d48c2bd2b6d36a3ae6c04/96a94f8f8ac84c438d0e95ebb1622b7f.jpg?imwidth=1800"
-        ]
-    ],
-    [
-        "id" => "danielwellington-petitelumine-orologio",
-        "categoria" => "gioielli",
-        "nome" => "PETITE LUMINE BEZEL 5-LINK TWO-TONE MOP - Orologio",
-        "prezzo" => "€219,00",
-        "sito" => "https://www.zalando.it/daniel-wellington-orologio-silver-dw254m06q-d11.html",
-        "form" => "https://forms.gle/GCm7rdBEhikc5DNY6",
-        "immagini" => [
-            "https://img01.ztat.net/article/spp-media-p1/fafa77ab2b274e14bb6f5cf28f582508/f9aae26f426f4d08af7d264a8de1cd71.jpg?imwidth=1800&filter=packshot",
-            "https://img01.ztat.net/article/spp-media-p1/15397fb624874f80a42a30310deee7ab/6888c0aba46a4d69abac684e4fa22743.jpg?imwidth=1800",
-            "https://img01.ztat.net/article/spp-media-p1/6e293b8664a845a58ef5b026c7ce5f74/a9d2678b08bf4c26a4d09accaed4d120.jpg?imwidth=1800"
-        ]
-    ],
-    [
-        "id" => "mc2saintbarth-emilie-tshirt",
-        "categoria" => "abbigliamento",
-        "nome" => "MC2 Saint Barth - Emilie T-shirt",
-        "prezzo" => "€75,00",
-        "sito" => "https://it.mc2saintbarth.com/products/emilie-cotton-t-shirt-with-50-nervosa-50-deliziosa-embroidery",
-        "form" => "https://forms.gle/GCm7rdBEhikc5DNY6",
-        "immagini" => [
-            "https://it.mc2saintbarth.com/cdn/shop/files/UID_EMI000105973H-WOMAN-T-SHIRT-WHITE-SMALLEMBROIDERY-MC2-20250630142725_2.jpg?v=1756816438&width=280",
-            "https://it.mc2saintbarth.com/cdn/shop/files/UID_EMI000105973H-WOMAN-T-SHIRT-WHITE-SMALLEMBROIDERY-MC2-20250630143502_1.jpg?v=1756816438&width=280",
-            "https://it.mc2saintbarth.com/cdn/shop/files/UID_EMI000105973H-WOMAN-T-SHIRT-WHITE-SMALLEMBROIDERY-MC2-20250630142725_3.jpg?v=1752222981&width=280"
-        ]
-    ],
-    [
-        "id" => "armanibeauty-si-eaudeparfum",
-        "categoria" => "cura estetica",
-        "nome" => "Armani Beauty - Sì Eau de Parfum",
-        "prezzo" => "€51,00",
-        "sito" => "https://www.zalando.it/armani-beauty-si-eau-de-parfum-a4u31i01x-s11.html",
-        "form" => "https://forms.gle/GCm7rdBEhikc5DNY6",
-        "immagini" => [
-            "https://img01.ztat.net/article/spp-media-p1/67c68c283a2041b1a7bcd1ba65e9b5a2/44196063de2742528141f8f0ed0beb9e.jpg?imwidth=1800&filter=packshot",
-            "https://img01.ztat.net/article/spp-media-p1/9f0956fe47f4415aa6a3df474864ccd9/ffa07e18119d4b37be81d6ee0de580da.jpg?imwidth=1800",
-            "https://img01.ztat.net/article/spp-media-p1/4dd26766fb7748ae89bb46c0e07d8d46/719f38929cb24bc3bd1b3e29d1ba6075.jpg?imwidth=1800"
-        ]
-    ],
-    [
-        "id" => "poloralphlauren-polobear-felpa",
-        "categoria" => "abbigliamento",
-        "nome" => "Polo Ralph Lauren - Polo Bear Felpa",
-        "prezzo" => "€245,00",
-        "sito" => "https://www.zalando.it/polo-ralph-lauren-polo-bear-fleece-crewneck-felpa-light-smoke-heather-po221j0c5-c11.html",
-        "form" => "https://forms.gle/GCm7rdBEhikc5DNY6",
-        "immagini" => [
-            "https://img01.ztat.net/article/spp-media-p1/e091dba5303e4724b6208d9fcd6ffbb1/7369d84fbcca4fe9bc4ca6a7f713f87f.jpg?imwidth=762",
-            "https://img01.ztat.net/article/spp-media-p1/d5b97e2d219f46fe9e57c6707f835cf6/ac1e2c18f274448ea8ec92fd82974833.jpg?imwidth=400&filter=packshot",
-            "https://img01.ztat.net/article/spp-media-p1/a939a9edf564435881de0dfb882eb8b1/9f4c7f18bdd841da8a96e3adda835f51.jpg?imwidth=400"
-        ]
-    ],
-    [
-        "id" => "mc2saintbarth-offwhite-totebag",
-        "categoria" => "accessori",
-        "nome" => "MC2 Saint Barth - Off-White Tote Bag",
-        "prezzo" => "€169,00",
-        "sito" => "https://it.mc2saintbarth.com/products/off-white-terry-embossed-vanity-sponge-tote-bag-with-black-details",
-        "form" => "https://forms.gle/GCm7rdBEhikc5DNY6",
-        "immagini" => [
-            "https://it.mc2saintbarth.com/cdn/shop/files/UID_VANI00700109H-ACCESSORY-BAG-WHITE_1.jpg?v=1751289346&width=280",
-            "https://it.mc2saintbarth.com/cdn/shop/files/UID_VANI00700109H-ACCESSORY-BAG-WHITE-0-0-20250324143501_2.jpg?v=1751289346&width=280"
-        ]
-    ],
-    [
-        "id" => "pinkgold-piastra-capelli",
-        "categoria" => "elettronica",
-        "nome" => "Pink Gold® - Piastra per Capelli Professionale",
-        "prezzo" => "€249,99",
-        "sito" => "https://www.douglas.it/it/p/5011831060",
-        "form" => "https://forms.gle/GCm7rdBEhikc5DNY6",
-        "immagini" => [
-            "https://media.douglas.it/medias/EOL30d1247597-0-dgl-IT.jpg?context=bWFzdGVyfGltYWdlc3w2OTQwM3xpbWFnZS9qcGVnfGFHUXlMMmd6WXk4Mk5qSTBNamN4TnpVME9EVTNOQzlGVDB3ek1HUXhNalEzTlRrM1h6QmZaR2RzTFVsVUxtcHdad3w2MWJkMDYzNmNiYjJkZjI4ODI0OTk1ZTdkZDQxOWEwNGU5Yjc3ODBiMjk3ZmRmYjgyMDBjM2MzYTM3NTVhZjVi&grid=true&imPolicy=grayScaled&imdensity=1&imwidth=484",
-            "https://media.douglas.it/medias/U4Bnt61247597-3-dgl-IT.jpg?context=bWFzdGVyfGltYWdlc3w5MzcyNnxpbWFnZS9qcGVnfGFEQXhMMmcwWWk4Mk5qSTBNVEF3TkRZek5ERTBNaTlWTkVKdWREWXhNalEzTlRrM1h6TmZaR2RzTFVsVUxtcHdad3w5MzViNzUwYzc3MWQ4YzYzODYxMGY1ZWM1OGNlMTQ0ODgwZGRiNmIyMzA5MTg4YzVmNjg2ODNhNmQ5MDUyY2Rl&grid=true&imdensity=1&imwidth=484",
-            "https://media.douglas.it/medias/3Iujtd1247597-2-dgl-IT.jpg?context=bWFzdGVyfGltYWdlc3wxMzM1NTV8aW1hZ2UvanBlZ3xhREV6TDJnek9TODJOakkwTWpjeE56WTNPVFkwTmk4elNYVnFkR1F4TWpRM05UazNYekpmWkdkc0xVbFVMbXB3Wnd8NTFmNGEwMDk4MTViMGQwODAwODQwMTI5ODk2ZWVkYmExNzZiOGIxMzZhZTM1NTcyYzU0NjFkMDU1ZTBhOTVlOA&grid=true&imdensity=1&imwidth=484"
-        ]
-    ],
-    [
-        "id" => "thenorthface-balance-felpa",
-        "categoria" => "abbigliamento",
-        "nome" => "The North Face - Balance Overhead Felpa",
-        "prezzo" => "€85,00",
-        "sito" => "https://www.jdsports.it/product/nero-the-north-face-balance-overhead-felpa/19707173_jdsportsit/",
-        "form" => "https://forms.gle/GCm7rdBEhikc5DNY6",
-        "immagini" => [
-            "https://i8.amplience.net/i/jpl/jd_766132_a?qlt=92&w=950&h=1212&v=1&fmt=auto",
-            "https://i8.amplience.net/i/jpl/jd_766132_e?qlt=92&w=950&h=1212&v=1&fmt=auto",
-            "https://i8.amplience.net/i/jpl/jd_766132_f?qlt=92&w=950&h=1212&v=1&fmt=auto"
-        ]
-    ],
-    [
-        "id" => "adidasoriginals-heart-felpa",
-        "categoria" => "abbigliamento",
-        "nome" => "Adidas Originals - Heart Felpa",
-        "prezzo" => "€70,00",
-        "sito" => "https://www.jdsports.it/product/grigio-adidas-originals-heart-felpa/19697825_jdsportsit/",
-        "form" => "https://forms.gle/GCm7rdBEhikc5DNY6",
-        "immagini" => [
-            "https://i8.amplience.net/i/jpl/jd_774113_a?qlt=92&w=950&h=1212&v=1&fmt=auto",
-            "https://i8.amplience.net/i/jpl/jd_774113_b?qlt=92&w=950&h=1212&v=1&fmt=auto",
-            "https://i8.amplience.net/i/jpl/jd_774113_e?qlt=92&w=950&h=1212&v=1&fmt=auto"
-        ]
-    ],
-    [
-        "id" => "nike-bubblewide-joggers",
-        "categoria" => "abbigliamento",
-        "nome" => "Nike - Bubble Graphic Wide Leg Joggers",
-        "prezzo" => "€65,00",
-        "sito" => "https://www.jdsports.it/product/rosa-nike-bubble-graphic-wide-leg-joggers/19708056_jdsportsit/",
-        "form" => "https://forms.gle/GCm7rdBEhikc5DNY6",
-        "immagini" => [
-            "https://i8.amplience.net/i/jpl/jd_773471_a?qlt=92&w=950&h=1212&v=1&fmt=auto",
-            "https://i8.amplience.net/i/jpl/jd_773471_b?qlt=92&w=950&h=1212&v=1&fmt=auto",
-            "https://i8.amplience.net/i/jpl/jd_773471_c?qlt=92&w=950&h=1212&v=1&fmt=auto"
-        ]
-    ],
-    [
-        "id" => "nike-bubblegraphic-felpa",
-        "categoria" => "abbigliamento",
-        "nome" => "Nike - Bubble Graphic Felpa",
-        "prezzo" => "€70,00",
-        "sito" => "https://www.jdsports.it/product/rosa-nike-bubble-graphic-felpa/19708055_jdsportsit/",
-        "form" => "https://forms.gle/GCm7rdBEhikc5DNY6",
-        "immagini" => [
-            "https://i8.amplience.net/i/jpl/jd_773470_a?qlt=92&w=950&h=1212&v=1&fmt=auto",
-            "https://i8.amplience.net/i/jpl/jd_773470_b?qlt=92&w=950&h=1212&v=1&fmt=auto",
-            "https://i8.amplience.net/i/jpl/jd_773470_c?qlt=92&w=950&h=1212&v=1&fmt=auto"
-        ]
-    ],
-    [
-        "id" => "amabilejewels-baguette-bracciale",
-        "categoria" => "gioielli",
-        "nome" => "Amabile Jewels - Bracciale Baguette Argento",
-        "prezzo" => "€59,90",
-        "sito" => "https://amabilejewels.it/products/bracciale-baguette",
-        "form" => "https://docs.google.com/forms/d/e/1FAIpQLSddQ9fmhRPmjwGMj_fx6yRkLvhdQGuCPhoDVRbqzWvhMrVcPg/viewform?usp=sharing&ouid=106593470597420597477",
-        "immagini" => [
-            "https://amabilejewels.it/cdn/shop/files/bracciale-baguette-argento-indossato-1.jpg?v=1757593815&width=240"
-        ]
     ]
+    // Aggiungi qui tutti gli altri prodotti nello stesso formato
 ];
+
+foreach($prodotti as $p):
+?>
+<div class="product" data-category="<?= $p['categoria'] ?>">
+    <div class="gallery">
+        <?php foreach($p['immagini'] as $img): ?>
+            <img src="<?= $img ?>" alt="<?= htmlspecialchars($p['nome']) ?>">
+        <?php endforeach; ?>
+    </div>
+    <h3><?= htmlspecialchars($p['nome']) ?></h3>
+    <p class="prezzo"><?= $p['prezzo'] ?></p>
+    <button class="btn-visita" data-href="<?= $p['sito'] ?>">VISITA</button>
+    <button class="btn-conferma" data-id="<?= $p['id'] ?>">CONFERMA ACQUISTO</button>
+</div>
+<?php endforeach; ?>
+
+</div>
 
 <script>
 (function(){
@@ -391,20 +153,6 @@ $prodotti = [
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
