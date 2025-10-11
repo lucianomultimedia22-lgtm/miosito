@@ -129,6 +129,31 @@
       background-color: #aaa;
       cursor: not-allowed;
     }
+    .product.sold-out {
+  position: relative;
+  overflow: hidden;
+}
+
+.product.sold-out::after {
+  content: "SOLD OUT";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-15deg);
+  background: rgba(255, 0, 0, 0.8);
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 15px 40px;
+  border-radius: 10px;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+  z-index: 10;
+}
+
+.product.sold-out img {
+  opacity: 0.4;
+}
+
 </style>
 </head>
 <body>
@@ -368,7 +393,7 @@
   <button class="btn-conferma" data-id="pinkgold-piastra-capelli" data-form="https://forms.gle/GCm7rdBEhikc5DNY6">Conferma acquisto</button>
 </div>
   <!-- The North Face Felpa -->
-<div class="product" data-category="abbigliamento" data-id="thenorthface-balance-felpa">
+<div class="product sold-out" data-category="abbigliamento" data-id="thenorthface-balance-felpa">
   <div class="gallery">
     <img src="https://i8.amplience.net/i/jpl/jd_766132_a?qlt=92&w=950&h=1212&v=1&fmt=auto">
     <img src="https://i8.amplience.net/i/jpl/jd_766132_e?qlt=92&w=950&h=1212&v=1&fmt=auto">
@@ -526,6 +551,7 @@
 </footer>
 </body>
 </html>
+
 
 
 
